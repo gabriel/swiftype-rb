@@ -8,7 +8,7 @@ module Swiftype
       @connection ||= begin
         conn = Faraday.new(Swiftype.endpoint) do |b|
           b.response :raise_error
-          b.use FaradayMiddleware::EncodeJson
+          b.use Faraday::Request::UrlEncoded
           b.use FaradayMiddleware::ParseJson
           b.use FaradayMiddleware::Mashify
           b.use ApiResponseMiddleware

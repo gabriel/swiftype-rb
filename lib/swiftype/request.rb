@@ -1,3 +1,5 @@
+require 'json'
+
 module Swiftype
   module Request
     def get(path, params={}, options={})
@@ -24,8 +26,9 @@ module Swiftype
         when :delete, :get
           request.url(path, params)
         when :post, :put
+          request.headers['Content-Type'] = 'application/json'
           request.path = path
-          request.body = params unless params.empty?
+          request.body = ::JSON.dump(params) unless params.empty?
         end
       end
       options[:raw] ? response : response.body
