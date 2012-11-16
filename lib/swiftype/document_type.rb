@@ -62,7 +62,8 @@ module Swiftype
     end
 
     def search(query, options={})
-      search_params = { :q => query }.merge(parse_search_options(options))
+      search_params = parse_search_options(options)
+      search_params[:q] = query || ""
       ResultSet.new(post("engines/#{engine_id}/document_types/#{slug}/search.json", search_params))
     end
   end
