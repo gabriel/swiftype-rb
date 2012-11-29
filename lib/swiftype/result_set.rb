@@ -1,7 +1,7 @@
 module Swiftype
   class ResultSet
     attr_accessor :records, :info
-    
+
     def initialize(results)
       @records = {}
       results['records'].each do |document_type, documents|
@@ -35,7 +35,7 @@ module Swiftype
     end
 
     def total_result_count(document_type)
-      info[document_type]['total_result_count']
+      info[document_type] ? info[document_type]['total_result_count'] : 0
     end
 
     def query
