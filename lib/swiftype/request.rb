@@ -30,6 +30,9 @@ module Swiftype
           request.path = path
           request.body = ::JSON.dump(params) unless params.empty?
         end
+
+        request.options[:timeout] = 120
+        request.options[:open_timeout] = 5
       end
       options[:raw] ? response : response.body
     end
