@@ -40,7 +40,8 @@ module Swiftype
         end
 
         options[:raw] ? response : response.body
-      rescue Errno::ETIMEDOUT, Faraday::Error::TimeoutError, Faraday::Error::ConnectionFailed => e
+      rescue Errno::ETIMEDOUT, Faraday::Error::TimeoutError, Faraday::Error::ConnectionFailed,
+          Swiftype::UnexpectedHTTPException => e
         if retries > 0
           retries -= 1
           retry
